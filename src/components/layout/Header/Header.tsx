@@ -2,22 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HeaderContainer, NavContainer, LogoContainer } from "./Header.styles";
 
-import Logo from "../../common/Logo/Logo";
-import NotificationIconContainer from "./NotificationIconContainer/NotificationIconContainer";
-import ProfileImage from "../../common/ProfileImage/ProfileImage";
-// import NotificationIcon from "../../common/icon/NotificationIcon/NotificationIcon";
 import ContactIcon from "../../common/icon/ContactIcon/ContactIcon";
-import Button from "../../common/button/Button";
 import BackIcon from "../../common/icon/BackIcon/BackIcon";
+import { Logo, ProfileImage, Button } from "../../common";
+import NotificationIconContainer from "./NotificationIconContainer/NotificationIconContainer";
 import ProfileDropdown from "../../features/profileDropdown/ProfileDropdown";
-
-import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
 import LoginModal from "../../features/login/LoginModal";
 import RegisterModal from "../../features/register/RegisterModal";
 import ProfileProposal from "../../features/register/ProfileProposal";
 import useModal from "../../../hooks/useModal";
-import useAuthStore from "../../../store/useAuthStore";
 import useChatUnread from "../../../hooks/Chat/useChatUnread";
+import useAuthStore from "../../../store/useAuthStore";
+import { getProfileImagePath } from "../../../utils/getProfileImagePath";
 
 /**
  * 로그인 안 되 었을 때
@@ -47,11 +43,14 @@ const Header = ({ isMainPage, isChatPage }: HeaderProps) => {
     handleCloseProfileProposal,
   } = useModal();
 
+  const profileImageIndex = useAuthStore((state) => state.profileImageIndex);
+  const loginProfileImage = getProfileImagePath(profileImageIndex);
+
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   //채팅 unread msg 개수 관련 커스텀 훅
   const userId = useAuthStore((state) => state.email); // 현재 로그인한 유저 아이디
-  const unreadCount = useChatUnread(userId);
+  const { unreadCount } = useChatUnread(userId);
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
@@ -105,20 +104,26 @@ const Header = ({ isMainPage, isChatPage }: HeaderProps) => {
     <>
       <HeaderContainer ref={headerRef}>
         <LogoContainer>
-          <Link to="/">
-            <h1>
+          {isMainPage ? (
+            <h1 onClick={() => window.location.reload()}>
               <Logo />
             </h1>
-          </Link>
+          ) : (
+            <Link to='/'>
+              <h1>
+                <Logo />
+              </h1>
+            </Link>
+          )}
         </LogoContainer>
         {!isMainPage && !isChatPage && (
-          <button onClick={() => navigate(-1)} title="Go Back">
+          <button onClick={() => navigate(-1)} title='Go Back'>
             <BackIcon />
           </button>
         )}
         {isLogin ? (
           <NavContainer>
-            <Link to="/chats">
+            <Link to='/chats'>
               <NotificationIconContainer notificationCount={unreadCount}>
                 <ContactIcon />
               </NotificationIconContainer>
@@ -129,8 +134,8 @@ const Header = ({ isMainPage, isChatPage }: HeaderProps) => {
             >
               <NotificationIcon />
             </NotificationIconContainer> */}
-            <button onClick={toggleDropdown} title="Toggle Profile Dropdown">
-              <ProfileImage src={DummyProfileImage} usageType="header" />
+            <button onClick={toggleDropdown} title='Toggle Profile Dropdown'>
+              <ProfileImage src={loginProfileImage} usageType='header' />
             </button>
           </NavContainer>
         ) : (
@@ -138,9 +143,9 @@ const Header = ({ isMainPage, isChatPage }: HeaderProps) => {
            * TODO: 우선 Button 컴포넌트를 사용하고, 텍스트 색상, 버튼 height 같은 디테일한 css는 후반부에 수정
            */
           <Button
-            buttonType="outline"
-            buttonSize="small"
-            label="로그인"
+            buttonType='outline'
+            buttonSize='small'
+            label='로그인'
             onClick={handleClick}
           />
         )}

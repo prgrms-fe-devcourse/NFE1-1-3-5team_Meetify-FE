@@ -9,7 +9,7 @@ export const TextAreaWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   margin-bottom: 8px;
   font-weight: var(--font-weight-semi-bold);
   font-family: inherit;
@@ -24,11 +24,12 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
   box-sizing: border-box;
   padding-top: 20px;
   padding-left: 10px;
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-semi-bold);
   resize: none; /* 리사이즈 핸들 제거 */
   text-align: left;
-  background-color: var(--font-color-white);
+  background-color: var(--bg-gray-light);
+  opacity: 0.3;
 
   color: ${(props) =>
     props.$variant === "placeholder"

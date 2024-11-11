@@ -1,4 +1,4 @@
-import { convertDate2Time } from "../../../../utils/dateUtil";
+import { convertDate2Time } from "../../../../utils/dateUtils";
 import ChatMsgWrapper from "./ChatMsg.styles";
 
 interface ChatMsgProps {

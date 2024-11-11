@@ -12,6 +12,7 @@ import useAuthCheck from "../../hooks/Chat/useAuthCheck";
 import useSocket from "../../hooks/Chat/useSocket";
 import { SERVER_URL } from "../../constants/Chat";
 import ListIcon from "../../components/common/icon/ListIcon/ListIcon";
+import useChatProfileStore from "../../store/useChatProfileStore";
 
 const ChatsPage = () => {
   /* 1. 로그인 상태가 아니면 Error 페이지로 리다이렉트 */
@@ -28,6 +29,8 @@ const ChatsPage = () => {
 
   const userId = useAuthStore((state) => state.email); // 현재 로그인한 유저 아이디
   const userNickName = useAuthStore((state) => state.nickname); // 현재 로그인한 유저 아이디
+
+  const setProfileIndex = useChatProfileStore((state) => state.setProfileIndex);
   // 소켓 훅 사용
   const { sendMessage, sendUnReadMessage } = useSocket({
     userId,
@@ -85,10 +88,13 @@ const ChatsPage = () => {
   ) => {
     const fetchChatList = async () => {
       try {
-        const chatListData: ServerChat[] = await fetchData(
-          `${SERVER_URL}/chat/${roomId}`
-        );
+        const {
+          chatListData,
+          profileIndex,
+        }: { chatListData: ServerChat[]; profileIndex: number } =
+          await fetchData(`${SERVER_URL}/chat/${roomId}/${otherUserId}`);
         setChatList(chatListData);
+        setProfileIndex(profileIndex);
       } catch (error) {
         console.error("Error fetching chat rooms:", error);
       }
@@ -136,6 +142,7 @@ const ChatsPage = () => {
           selectedRoomId={currentRoomId}
         />
       </ChatRoomInfoContainerWrapper>
+
       <ChatRoom
         chatList={chatList}
         roomId={currentRoomId}

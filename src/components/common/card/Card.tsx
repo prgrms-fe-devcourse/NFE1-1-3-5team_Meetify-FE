@@ -27,7 +27,8 @@ import LoginModal from "../../features/login/LoginModal";
  * TODO
  * 임시로 사용하는 프로필 이미지로 첨부파일 업로드기능 개발 시, 실제 프로필이미지로 교체
  */
-import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
+// import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
+import { getProfileImagePath } from "../../../utils/getProfileImagePath";
 
 // (포지션, 기술스택) 최대 표시 개수 정의
 const MAX_POSITION_DISPLAY = 3;
@@ -57,6 +58,8 @@ const Card = ({
   const location = useLocation();
   const navigate = useNavigate();
   const isLikePage = location.pathname === "/my-like";
+  const profileImageIndex = user_profile.profile_image_index;
+  const postProfileImage = getProfileImagePath(profileImageIndex);
 
   // 날짜 포맷팅
   const createDate = new Date(created_at);
@@ -127,7 +130,7 @@ const Card = ({
         <TechIconContainer techStackList={displayedTechStacks} />
 
         <Author>
-          <ProfileImage src={DummyProfileImage} usageType='card' />
+          <ProfileImage src={postProfileImage} usageType="card" />
           <AuthorName>{user_profile.nickname}</AuthorName>
         </Author>
       </StyledCard>

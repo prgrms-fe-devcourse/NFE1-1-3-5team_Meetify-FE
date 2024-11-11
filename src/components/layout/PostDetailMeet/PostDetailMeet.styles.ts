@@ -15,19 +15,18 @@ export const Row = styled.div`
 `;
 
 export const FormColumn = styled.div`
-  min-width: 600px;
+  min-width: 570px;
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 24px;
-  margin-top: 40px;
-  margin-bottom: 50px;
 `;
 
 // 추가 스타일
 export const Content = styled.pre`
+  min-height: 240px;
   white-space: pre-wrap;
   font-size: var(--font-size-body-large);
   line-height: 1.6;

@@ -1,4 +1,4 @@
-import { convertDate2Str } from "../../../../utils/dateUtil";
+import { convertDate2Str } from "../../../../utils/dateUtils";
 import ChatDayWarpper from "./ChatDay.styles";
 
 interface ChatDayProps {

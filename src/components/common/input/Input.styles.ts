@@ -6,7 +6,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.p`
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   margin-bottom: 8px;
   font-weight: var(--font-weight-semi-bold);
   font-family: inherit;
@@ -14,12 +14,12 @@ export const Label = styled.p`
 
 export const StyledInput = styled.input`
   width: 100%;
-  height: 60px;
+  min-height: 50px;
   border: 1px solid var(--bg-gray-light);
   border-radius: 10px;
   box-sizing: border-box;
   padding: 0 10px;
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-semi-bold);
   color: var(--font-color-dark);
 

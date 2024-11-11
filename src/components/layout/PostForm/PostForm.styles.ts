@@ -15,7 +15,7 @@ export const Row = styled.div`
 `;
 
 export const FormColumn = styled.div`
-  min-width: 600px;
+  min-width: 570px;
 `;
 
 export const ButtonWrapper = styled.div`

@@ -35,12 +35,11 @@
   --bg-purple-light: #f2f4ff;
 
   --mask-color-20: rgba(0, 0, 0, 0.2);
-  --mask-color-40: rgba(0, 0, 0, 0.4);
   /* Chat Colors */
-  --color-chat-yellow: #ffeb3b;
-  --color-chat-orange: #ff7831;
+  --color-chat-yellow: #a19791;
+  --color-chat-orange: #ffa63d;
   --color-chat-gray: #a19791;
-  --color-chat-bg: rgb(178, 199, 217);
+  --color-chat-bg: #ffefdb;
 
   /* Gradient */
   --primary-color-gra-start: #ff7831;

@@ -20,7 +20,7 @@ const ChatMsgWrapper = styled.div`
   }
   .other {
     order: -1;
-    background-color: var(--color-gray-light);
+    background-color: #ffffff;
   }
 
   /* other 인 경우 위치 조정*/

@@ -3,6 +3,7 @@ import { getPostList } from "../services/postService";
 import { PostListReqParams, PostListResParams } from "../types/PostList";
 import { SelectOption } from "../types/types";
 import useAuthStore from "./../store/useAuthStore";
+import useLoadingStore from "./../store/useLoadingStore";
 
 interface UseMainPageReturn {
   postList: PostListResParams[] | null;
@@ -16,6 +17,7 @@ interface UseMainPageReturn {
   ) => void;
   handlePageChange: (page: number) => void;
   selectPostType: string;
+  isLoading: boolean;
 }
 
 // TODO 전역으로 변경
@@ -24,6 +26,7 @@ const MAX_POST_DISPLAY = 8;
 
 const useMainPage = (): UseMainPageReturn => {
   const { isLogin, email } = useAuthStore();
+  const { isLoading, setLoading } = useLoadingStore();
   const [postList, setPostList] = useState<PostListResParams[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -35,6 +38,7 @@ const useMainPage = (): UseMainPageReturn => {
 
   useEffect(() => {
     const fetchPostList = async () => {
+      setLoading(true);
       const params: PostListReqParams = {
         page: currentPage,
         limit: MAX_POST_DISPLAY,
@@ -53,6 +57,8 @@ const useMainPage = (): UseMainPageReturn => {
         setPostList(response.data.postList);
       } catch (error) {
         console.error("API 요청 중 에러 발생 :: ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -66,6 +72,7 @@ const useMainPage = (): UseMainPageReturn => {
     selectParticipation,
     isLogin,
     email,
+    setLoading,
   ]);
 
   const handleTabChange = (type: string) => {
@@ -105,6 +112,7 @@ const useMainPage = (): UseMainPageReturn => {
     handleSelectChange,
     handlePageChange,
     selectPostType,
+    isLoading,
   };
 };
 

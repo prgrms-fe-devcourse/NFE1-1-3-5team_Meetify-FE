@@ -13,6 +13,7 @@ import {
   PositionOptions,
   AvailableTimeOptions,
 } from "../../constants/options";
+import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 
 const UpdateMeetPage: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
@@ -82,7 +83,7 @@ const UpdateMeetPage: React.FC = () => {
     navigate(-1); // 취소 버튼 클릭 시 이전 페이지로 이동
   };
 
-  if (!initialData) return <p>Loading...</p>;
+  if (!initialData) return <LoadingSpinner />;
 
   return (
     <PostFormMeet

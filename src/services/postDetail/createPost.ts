@@ -2,14 +2,14 @@ import axios from "axios";
 import { PostFormData, PostFormMeetData } from "../../types/Post";
 import { preparePostData, preparePostDataMeet } from "./preparePostData"; // preparePostData 함수 임포트
 
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL = import.meta.env.VITE_API_URL;
 
 // 프로젝트 게시글 생성 함수
 export const createProjectPost = async (postData: PostFormData) => {
   try {
     const preparedData = preparePostData(postData, "PROJECT");
     const response = await axios.post(
-      `${SERVER_URL}/api/post-detail`,
+      `${SERVER_URL}/post-detail`,
       preparedData
     );
     console.log("보내는 데이터 확인:", response.data);
@@ -25,7 +25,7 @@ export const createStudyPost = async (postData: PostFormData) => {
   try {
     const preparedData = preparePostData(postData, "STUDY");
     const response = await axios.post(
-      `${SERVER_URL}/api/post-detail`,
+      `${SERVER_URL}/post-detail`,
       preparedData
     );
     console.log("보내는 데이터 확인:", response.data);
@@ -41,7 +41,7 @@ export const createMeetPost = async (postData: PostFormMeetData) => {
   try {
     const preparedData = preparePostDataMeet(postData, "MEET");
     const response = await axios.post(
-      `${SERVER_URL}/api/post-detail`,
+      `${SERVER_URL}/post-detail`,
       preparedData
     );
     console.log("보내는 데이터 확인:", response.data);

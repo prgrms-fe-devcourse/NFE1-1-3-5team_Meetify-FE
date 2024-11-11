@@ -28,8 +28,9 @@ export interface PostFormMeetData {
 
 // 사용자 프로필 타입
 export interface UserProfile {
-  name: string; // 사용자 이름
-  profile_image: string; // 사용자 프로필 이미지 URL
+  nickname: string; // 사용자 이름
+  email: string; // 사용자 이메일
+  profile_image_index: number; // 사용자 프로필 이미지 인덱스
 }
 
 // 게시글 상세 정보에 필요한 모든 필드 포함
@@ -48,6 +49,7 @@ export interface PostDetailData {
   available_time?: string; // 참여 가능 시간 (모임 타입)
   created_at: string; // 생성 시간
   updated_at?: string; // 수정 시간
+  user_profile: UserProfile; // 사용자 프로필
 }
 
 // 상세 페이지 컴포넌트에 전달할 Props 타입

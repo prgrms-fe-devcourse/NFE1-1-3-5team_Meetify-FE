@@ -156,6 +156,9 @@ button {
   background-color: transparent;
 }
 
-input::placeholder{
+input,
+textarea,
+input::placeholder,
+textarea::placeholder {
   font-family: "Pretendard-Regular", sans-serif;
 }

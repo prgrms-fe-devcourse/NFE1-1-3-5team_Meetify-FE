@@ -52,4 +52,5 @@ export const AuthorName = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 180px;
 `;

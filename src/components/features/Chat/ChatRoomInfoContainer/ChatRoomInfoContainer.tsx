@@ -49,12 +49,13 @@ const ChatRoomContainer = ({
             } // 클릭 시 roomId 전달
             roomId={chatRoom.roomId}
             selectedRoomId={selectedRoomId}
+            profileImageIndex={chatRoom.profileImageIndex}
           />
         ))}
       {rooms.map((chatRoom) => (
         <ChatRoomItem
           key={chatRoom.roomId}
-          imgUrl={chatRoom.imgUrl}
+          profileImageIndex={chatRoom.profileImageIndex}
           name={chatRoom.name}
           unReadMsgCnt={chatRoom.unReadMsgCnt}
           lastMsg={chatRoom.lastMsg}

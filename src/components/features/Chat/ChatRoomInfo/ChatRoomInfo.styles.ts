@@ -20,6 +20,11 @@ const ChatRoomInfoWrapper = styled.div`
     flex-direction: row;
     gap: 24px;
   }
+
+  .profile--and--msg img {
+    width: 50px;
+    height: 50px;
+  }
   .name--and--msg {
     display: flex;
     flex-direction: column;

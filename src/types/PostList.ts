@@ -55,5 +55,6 @@ export interface PostListResParams {
   // 사용자 닉네임
   user_profile: {
     nickname: string;
+    profile_image_index: number;
   };
 }

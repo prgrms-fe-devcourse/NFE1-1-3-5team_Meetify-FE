@@ -1,3 +1,4 @@
+import useChatProfileStore from "../../../../store/useChatProfileStore";
 import { Chat } from "../../../../types/Chat";
 import ChatMsg from "../ChatMsg/ChatMsg";
 
@@ -11,6 +12,8 @@ export interface ChatMsgContainerProps {
   isMe: boolean;
   /** 채팅 보낸 타 유저 닉네임 */
   userNickName: string;
+  /** 채팅 보낸 타 유저 프로필 번호 */
+  profileImageIndex?: number;
 }
 
 const ChatMsgContainer = ({
@@ -19,9 +22,15 @@ const ChatMsgContainer = ({
   userNickName,
 }: ChatMsgContainerProps) => {
   const isMeClass = isMe ? "my" : "other";
+  const profileIndex = useChatProfileStore((state) => state.profileIndex);
   return (
     <ChatMsgContainerWrapper className={isMeClass}>
-      {!isMe && <ChatMsgProfile name={userNickName}></ChatMsgProfile>}
+      {!isMe && (
+        <ChatMsgProfile
+          name={userNickName}
+          profileImageIndex={profileIndex}
+        ></ChatMsgProfile>
+      )}
       {chatList.map((chat, index) => (
         <ChatMsg
           key={index}

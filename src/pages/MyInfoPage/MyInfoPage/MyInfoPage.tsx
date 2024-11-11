@@ -18,15 +18,16 @@ import {
 } from "../../../constants/options";
 import { fetchUserProfile } from "../../../services/userProfile/fetchUserProfile";
 
-import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
+// import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
 import useAuthApi from "../../../hooks/useAuthApi";
-
+import { getProfileImagePath } from "../../../utils/getProfileImagePath";
 /**
  * MyInfoPage - 사용자 정보 읽기 전용 페이지
  */
 const MyInfoPage = () => {
   const loginEmail = useAuthStore((state) => state.email);
-  const setIsLogin = useAuthStore((state) => state.setIsLogin);
+  // const setIsLogin = useAuthStore((state) => state.setIsLogin);
+  const profileImageIndex = useAuthStore((state) => state.profileImageIndex);
   const [userInformation, setUserInformation] = useState({
     inputNickname: "",
     selectPosition: {} as SelectOption,
@@ -35,8 +36,10 @@ const MyInfoPage = () => {
     selectInterests: [] as SelectOption[],
   });
   const navigate = useNavigate();
+  const loginProfileImage = getProfileImagePath(profileImageIndex);
 
   const { deleteUser } = useAuthApi();
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
     const fetchUserProfileData = async () => {
@@ -78,7 +81,8 @@ const MyInfoPage = () => {
   const handleDeleteUser = async () => {
     try {
       await deleteUser(loginEmail);
-      setIsLogin(false);
+      // setIsLogin(false);
+      logout();
       navigate("/");
     } catch (error) {
       console.error("회원 탈퇴 중 오류 발생:", error);
@@ -89,7 +93,7 @@ const MyInfoPage = () => {
     <MyInfoEditPageWrapper>
       <ProfileContainer>
         <ProfileImage
-          src={DummyProfileImage}
+          src={loginProfileImage}
           alt="user profile image"
           usageType="userInformation"
         />

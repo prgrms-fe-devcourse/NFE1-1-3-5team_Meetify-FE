@@ -5,7 +5,7 @@ import ChatMsgContainer from "../ChatMsgContainer/ChatMsgContainer";
 import ChatDay from "../ChatDay/ChatDay";
 import { ServerChat } from "../../../../types/Chat";
 import { useChatGroups } from "../../../../hooks/Chat/useChatGroups";
-import { convertDate2Str } from "../../../../utils/dateUtil";
+import { convertDate2Str } from "../../../../utils/dateUtils";
 import BannerIcon from "../../../common/icon/BannerIcon/BannerIcon";
 import {
   useAutoScroll,

@@ -22,7 +22,7 @@ import {
   ButtonWrapper,
   PostFormContainer,
 } from "./PostFormMeet.styles";
-
+import { toast } from "react-toastify";
 interface PostFormProps {
   title: string;
   onSubmit: (data: PostFormMeetData) => void;
@@ -78,6 +78,10 @@ const PostFormMeet: React.FC<PostFormProps> = ({
     // 폼 검증 후 제출
     if (validatePostFormMeet(formData)) {
       onSubmit(formData);
+      if (initialData) {
+        // Toastify 알림 표시
+        toast.success("게시글이 수정되었습니다.");
+      } else toast.success("게시글이 작성되었습니다.");
     }
   };
 

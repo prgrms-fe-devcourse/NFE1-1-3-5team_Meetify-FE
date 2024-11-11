@@ -10,7 +10,7 @@ export const DatePickerWrapper = styled.div`
 `;
 
 export const Label = styled.p`
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   font-weight: var(--font-weight-semi-bold);
   color: var(--font-color-dark);
   margin-top: -30px;
@@ -19,10 +19,10 @@ export const Label = styled.p`
 export const StyledDatePicker = styled(MuiDatePicker)`
   .MuiInputBase-root {
     min-height: auto;
-    width: 600px;
+    width: 570px;
     border-radius: 10px;
     padding: 0 3px;
-    font-size: var(--font-size-head-small);
+    font-size: var(--font-size-body-medium);
     font-weight: var(--font-weight-semi-bold);
     align-items: center;
     display: flex;

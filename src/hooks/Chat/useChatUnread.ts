@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { SERVER_URL } from "../../constants/Chat";
+import useAuthStore from "../../store/useAuthStore";
 
 // useChatUnread 커스텀 훅
 const useChatUnread = (userId: string) => {
   const [unreadCount, setUnreadCount] = useState(0); // 채팅 UnRead 메시지 cnt
-
+  const { isLogin } = useAuthStore();
+  useEffect(() => {
+    if (!isLogin) {
+      setUnreadCount(0);
+    }
+  }, [isLogin]);
   useEffect(() => {
     if (!userId) return; // userId가 없으면 SSE 연결하지 않음
 
@@ -29,7 +35,7 @@ const useChatUnread = (userId: string) => {
     };
   }, [userId]);
 
-  return unreadCount; // 사용된 컴포넌트에서 unreadCount를 반환
+  return { unreadCount, setUnreadCount }; // 사용된 컴포넌트에서 unreadCount를 반환
 };
 
 export default useChatUnread;

@@ -12,8 +12,8 @@ import MyPageIcon from "../../common/icon/MyPageIcon/MyPageIcon";
 import EmptyHeartIcon from "../../common/icon/EmptyHeartIcon/EmptyHeartIcon";
 import MyPostIcon from "../../common/icon/MyPostIcon/MyPostIcon";
 import LogoutIcon from "../../common/icon/LogoutIcon/LogoutIcon";
-
-import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
+import { getProfileImagePath } from "../../../utils/getProfileImagePath";
+// import DummyProfileImage from "../../../assets/profile-image/Dummy-Profile-Image.png";
 import useAuthStore from "../../../store/useAuthStore";
 
 interface DropdownProps {
@@ -31,8 +31,10 @@ const ProfileDropdown: React.FC<DropdownProps> = ({
   closeDropdown,
 }) => {
   const userNickname = useAuthStore((state) => state.nickname);
+  const profileImageIndex = useAuthStore((state) => state.profileImageIndex);
   const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);
+  const loginProfileImage = getProfileImagePath(profileImageIndex);
 
   const handleClickMyPage = () => {
     closeDropdown();
@@ -61,7 +63,7 @@ const ProfileDropdown: React.FC<DropdownProps> = ({
     <DropdownContainer $isVisible={isVisible}>
       <ProfileContainer>
         <ProfileImageContainer>
-          <ProfileImage src={DummyProfileImage} usageType="card" />
+          <ProfileImage src={loginProfileImage} usageType="card" />
         </ProfileImageContainer>
         {userNickname && <span>{userNickname}</span>}
       </ProfileContainer>

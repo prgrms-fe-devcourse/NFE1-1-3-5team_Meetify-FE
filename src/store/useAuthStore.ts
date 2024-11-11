@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 interface AuthState {
   email: string;
   nickname: string;
+  profileImageIndex: number;
   isLogin: boolean;
   showProfileProposal: boolean;
   validation: Record<string, { isValid: boolean; message: string }>;
@@ -11,6 +12,7 @@ interface AuthState {
   // Actions
   setEmail: (email: string) => void;
   setNickname: (nickname: string) => void;
+  setProfileImageIndex: (profileImageIndex: number) => void;
   setIsLogin: (isLogin: boolean) => void;
   setShowProfileProposal: (show: boolean) => void;
   logout: () => void;
@@ -24,6 +26,7 @@ const useAuthStore = create<AuthState>()(
     (set) => ({
       email: "",
       nickname: "",
+      profileImageIndex: 1,
       isLogin: false,
       showProfileProposal: false,
       validation: {
@@ -35,10 +38,21 @@ const useAuthStore = create<AuthState>()(
       setEmail: (email: string) => set((state) => ({ ...state, email })),
       setNickname: (nickname: string) =>
         set((state) => ({ ...state, nickname })),
+      setProfileImageIndex: (profileImageIndex: number) =>
+        set((state) => ({ ...state, profileImageIndex })),
       setIsLogin: (isLogin: boolean) => set((state) => ({ ...state, isLogin })),
       setShowProfileProposal: (show: boolean) =>
         set((state) => ({ ...state, showProfileProposal: show })),
-      logout: () => set(() => ({ email: "", nickname: "", isLogin: false })),
+      logout: () => {
+        set(() => ({
+          email: "",
+          nickname: "",
+          isLogin: false,
+          profileImageIndex: 1,
+          showProfileProposal: false,
+        }));
+        localStorage.removeItem("token");
+      },
       setValidation: (validation) => set(() => ({ validation })),
     }),
     {
@@ -48,6 +62,7 @@ const useAuthStore = create<AuthState>()(
         nickname: state.nickname,
         isLogin: state.isLogin,
         showProfileProposal: state.showProfileProposal,
+        profileImageIndex: state.profileImageIndex,
       }),
     }
   )

@@ -33,6 +33,9 @@ const useAuthApi = (): UseAuthApiReturn => {
   const setIsLogin = useAuthStore((state) => state.setIsLogin);
   const setEmail = useAuthStore((state) => state.setEmail);
   const setNickname = useAuthStore((state) => state.setNickname);
+  const setProfileImageIndex = useAuthStore(
+    (state) => state.setProfileImageIndex
+  );
   const setShowProfileProposal = useAuthStore(
     (state) => state.setShowProfileProposal
   );
@@ -48,7 +51,10 @@ const useAuthApi = (): UseAuthApiReturn => {
       setIsLogin(true); // 로그인 성공 시 isLogin 상태 업데이트
       setEmail(email); // 로그인 성공 시 이메일 상태 업데이트
       setNickname(response.data.nickname); // 로그인 성공 시 닉네임 상태 업데이트
+      setProfileImageIndex(response.data.profile_image_index); // 로그인 성공 시 프로필 이미지 인덱스 상태 업데이트
+
       console.log("닉네임:", response.data.nickname);
+      console.log("프로필 이미지 인덱스:", response.data.profile_image_index);
 
       // JWT 토큰을 로컬 스토리지에 저장
       localStorage.setItem("token", response.data.token);
@@ -102,6 +108,7 @@ const useAuthApi = (): UseAuthApiReturn => {
   const deleteUser = async (email: string) => {
     try {
       const response = await axios.delete(`${VITE_API_URL}/auth/${email}`);
+      localStorage.removeItem("token");
       console.log("회원탈퇴 성공:", response.data);
     } catch (error) {
       console.error("회원탈퇴 실패:", error);

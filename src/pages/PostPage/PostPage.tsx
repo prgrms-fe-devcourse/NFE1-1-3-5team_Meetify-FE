@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PostDetail from "../../components/layout/PostDetail/PostDetail";
 import { getPostById } from "../../services/postDetail/getPost";
-import { PostDetailProps } from "../../types/Post"; // PostDetailProps를 import 합니다.
+import { PostDetailProps } from "../../types/Post";
 import { Container, Content } from "./PostPage.styles";
 import PostDetailMeet from "../../components/layout/PostDetailMeet/PostDetailMeet";
-
+import { deletePost } from "../../services/postDetail/deletePost";
+import LoadingSpinner from "../../components/common/LoadingSpinner/LoadingSpinner";
 const PostPage = () => {
   const { postId } = useParams<{ postId: string }>();
-  console.log("postId:", postId);
+  // console.log("postId:", postId);
   const navigate = useNavigate();
   const [postData, setPostData] = useState<PostDetailProps["postData"] | null>(
     null
@@ -19,7 +20,8 @@ const PostPage = () => {
       if (!postId) return;
       try {
         const data = await getPostById(postId);
-        console.log("게시글 데이터를 불러왔습니다:", data);
+        // console.log("게시글 데이터를 불러왔습니다:", data);
+        // console.log("게시글 유저정보:", data.user_profile);
         // PostDetailProps["postData"] 형식에 맞게 변환
         const transformedData: PostDetailProps["postData"] = {
           id: data.id,
@@ -35,12 +37,13 @@ const PostPage = () => {
           created_at: data.created_at,
           affiliation: data.affiliation,
           available_time: data.available_time,
-          // user_profile: {
-          //   name: data.user_profile.name,
-          //   // profile_image: data.user_profile.profile_image,
-          // },
+          user_profile: {
+            nickname: data.user_profile.nickname,
+            email: data.user_profile.email,
+            profile_image_index: data.user_profile.profile_image_index,
+          },
         };
-        console.log("변환된 데이터:", transformedData);
+        // console.log("변환된 데이터:", transformedData);
         setPostData(transformedData);
       } catch (error) {
         console.error("게시글 데이터를 불러오는데 실패했습니다:", error);
@@ -60,15 +63,21 @@ const PostPage = () => {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     const confirmed = window.confirm("정말로 이 게시글을 삭제하시겠습니까?");
-    if (confirmed) {
-      console.log("게시글이 삭제되었습니다:", postId);
-      navigate("/"); // 삭제 후 메인 페이지로 이동
+    if (confirmed && postId) {
+      console.log("게시글 삭제 요청:", postId);
+      try {
+        await deletePost(postId); // 서버에 삭제 요청
+        navigate("/"); // 삭제 성공 후 메인 페이지로 리디렉션
+      } catch (error) {
+        console.error("게시글 삭제 중 오류 발생:", error);
+        alert("게시글 삭제에 실패했습니다.");
+      }
     }
   };
 
-  if (!postData) return <p>Loading...</p>;
+  if (!postData) return <LoadingSpinner />;
 
   return (
     <Container>

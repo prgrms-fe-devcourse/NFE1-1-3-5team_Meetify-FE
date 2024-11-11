@@ -49,8 +49,8 @@ export const StyledRegisterModal = styled.div`
   background-color: #ffff;
   border: 2px solid var(--bg-gray-light);
   border-radius: 30px;
-  width: 500px;
-  height: 550px;
+  width: 430px;
+  height: 500px;
 `;
 
 /* 로그인 모달 사이즈 */
@@ -64,8 +64,8 @@ export const StyledLoginModal = styled.div`
   background-color: #ffff;
   border: 2px solid var(--bg-gray-light);
   border-radius: 30px;
-  width: 500px;
-  height: 450px;
+  width: 420px;
+  height: 470px;
   animation: ${modalAnimation} 0.3s ease-out;
 `;
 
@@ -75,7 +75,8 @@ export const Title = styled.span`
   background: linear-gradient(120deg, #ff935a 28.37%, #ffdc78 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: ${titleAnimate} 1s ease-out;
+  user-select: none;
+  animation: ${titleAnimate} 0.5s ease-out;
   display: inline-block;
 `;
 

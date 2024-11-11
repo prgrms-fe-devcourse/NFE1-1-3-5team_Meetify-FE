@@ -14,6 +14,7 @@ import {
 import BannerIcon from "../../../common/icon/BannerIcon/BannerIcon";
 import WriteModal from "../../../common/WriteModal/WriteModal";
 import LoginModal from "../../login/LoginModal";
+import RegisterModal from "../../register/RegisterModal";
 import useModal from "../../../../hooks/useModal";
 import { Button, WriteButton } from "../../../common";
 
@@ -21,6 +22,7 @@ const MainBanner = () => {
   const {
     isLogin,
     isModalOpen,
+    isLoginView,
     handleClick,
     handleCloseModal,
     toggleModalView,
@@ -57,11 +59,16 @@ const MainBanner = () => {
       {isModalOpen &&
         (isLogin ? (
           <WriteModal onClick={handleCloseModal} />
-        ) : (
+        ) : isLoginView ? (
           <LoginModal
             onClose={handleCloseModal}
             onToggleView={toggleModalView}
             onLoginSuccess={handleLoginSuccess}
+          />
+        ) : (
+          <RegisterModal
+            onClose={handleCloseModal}
+            onToggleView={toggleModalView}
           />
         ))}
     </>

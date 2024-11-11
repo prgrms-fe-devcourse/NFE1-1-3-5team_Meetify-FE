@@ -15,6 +15,7 @@ const ChatRoomWrapper = styled.div`
   border-radius: 16px;
 
   .chat--item {
+    padding: 16px 16px 0px 16px;
     max-height: 800px;
     overflow-y: auto;
     display: flex;

@@ -13,7 +13,7 @@ export interface ChatRoomInfo {
   /** 채팅방 ID */
   roomId: string;
   /** 프로필 이미지 경로 */
-  imgUrl?: string;
+  profileImageIndex: number;
   /** 타 유저 닉네임 */
   name: string;
   /** 타 유저 아이디 */

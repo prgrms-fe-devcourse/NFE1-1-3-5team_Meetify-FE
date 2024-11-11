@@ -5,7 +5,7 @@ export const SelectWrapper = styled.div`
 `;
 
 export const Label = styled.p`
-  font-size: var(--font-size-head-small);
+  font-size: var(--font-size-body-medium);
   margin-bottom: 8px;
   font-weight: var(--font-weight-semi-bold);
   font-family: inherit;
@@ -15,11 +15,11 @@ export const Label = styled.p`
 export const StyledSelect = styled.div<{ $variant: "default" | "rounded" }>`
   .react--select__control {
     min-height: auto;
-    width: 600px;
+    width: 570px;
     color: var(--primary-color-org);
     border-radius: 10px;
     padding: 0 3px;
-    font-size: var(--font-size-head-small);
+    font-size: var(--font-size-body-medium);
     font-weight: var(--font-weight-semi-bold);
     align-items: center;
     display: flex;
@@ -37,7 +37,7 @@ export const StyledSelect = styled.div<{ $variant: "default" | "rounded" }>`
     display: flex;
     flex-wrap: wrap; /* 선택 항목이 줄 바꿈되도록 설정 */
     align-items: flex-center;
-    min-height: 60px;
+    min-height: 50px;
 
     ${({ $variant }) =>
       $variant === "rounded" &&
